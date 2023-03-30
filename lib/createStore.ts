@@ -102,7 +102,7 @@ export default function createStore<
     function dispatch(action: A) {
 
         // type checking
-        if (isPlainObject(action)) {
+        if (!isPlainObject(action)) {
             throw new Error(`Actions must be plain objects. Instead, the actual type was: '${kindOf(action)}'`)
         }
 
@@ -135,10 +135,10 @@ export default function createStore<
 
     // return Store Instance 
     const store = {
-        dispatch: dispatch,                          // dispatch Action 变更状态
+        dispatch: dispatch,                           // dispatch Action 变更状态
         subscribe: subscribe,                         // 通过 store.subscribe(listener) 注册监听器回调  dispatch结尾会依次执行listener             
-        getState: getState,                          // 获取currentState
-        // [$$observable]: 4,         // 看不懂
+        getState: getState,                           // 获取currentState
+        // [$$observable]: 4,                         // 看不懂
     } as unknown as Store
 
     return store
